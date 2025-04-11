@@ -53,8 +53,6 @@ class AuthController extends Controller
                 'senha'    => Hash::make($request->input('senha')),
             ]);
 
-
-
             $username = $request->input('username');
             $user = User::where('username', $username)->first(); // Busca o usuário
 
@@ -68,10 +66,18 @@ class AuthController extends Controller
             ->where('user_id', session('user_id'))
             ->get();
 
-            return view('dashboard.dash', [
+
+            $usernome = "@$username";
+            // Return the view with the user, username, and appointments
+            // Retorna a view com o usuário, nome de usuário e agendamentos
+
+            return redirect()->route('dashboard')->with([
                 'user' => $user,
-                'username' => $user->username,
-                'agendamentos' => $agendamentos,]);
+                'username' => $usernome,
+                'agendamentos' => $agendamentos,
+            ]);
+
+
         }
 
         return view('pages.signup');

@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(180deg, #fff, #000000);
+    background: black;
     color: #333;
     display: flex;
     justify-content: center;
@@ -39,6 +39,7 @@ form {
     background: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px #0000001a;
     flex-direction: column;
     gap: 20px;
 }
@@ -75,7 +76,6 @@ button {
     font-weight: bold;
     cursor: pointer;
     text-align: center;
-    width: 30%;
     transition: all 0.3s ease;
     gap: 20px;
 }

@@ -16,7 +16,7 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
+            <a class="nav-link" aria-current="page" href="/dashboard">Dashboard</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="/dashboard/novo-agendamento">Novo agendamento</a>
@@ -25,7 +25,7 @@
             <a class="nav-link" aria-current="page" href="/dashboard/meus-agendamentos">Meus agendamentos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/logout">Logout</a>
+            <a class="nav-link" aria-current="page" style="color: rgb(241, 63, 63);" href="/logout">Logout</a>
           </li>
         </ul>
       </div>

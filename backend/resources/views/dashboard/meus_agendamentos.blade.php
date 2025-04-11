@@ -26,7 +26,7 @@
                         <td>{{ $agendamento->hora }}</td>
                         <td>{{ $agendamento->quadra }}</td>
                         <td>
-                        <form action="{{ route('delete_agendamentos', ['id' => $agendamento->id]) }}" method="POST">
+                        <form style="background: transparent; box-shadow: 0 4px 10px transparent;" action="{{ route('delete_agendamentos', ['id' => $agendamento->id]) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit">Excluir</button>

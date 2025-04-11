@@ -25,20 +25,20 @@
             <h2>Novo Agendamento</h2>
 
 
-            <!-- Etapa 2: Data -->
+            <!-- Etapa 1: Data -->
             <div class="step" id="step1" style="display: none;">
                 <label for="data">Data:</label>
                 <div style="display: flex; align-items: center;">
-                    <input type="text" name="data" id="data" placeholder="Selecione a data" required style="opacity: 0; position: absolute;">
-                    <button type="button" id="calendarButton" style="background: none; border: none; cursor: pointer;">
+                    <input type="text" name="data" id="data" placeholder="Selecione a data" required >
+                    <button type="button" id="calendarButton">
                         <img src="https://cdn-icons-png.flaticon.com/512/747/747310.png" alt="Ícone de calendário" width="24" height="24">
                     </button>
-                    <span id="selectedDate" style="margin-left: 10px; font-weight: bold;">Selecione uma data</span>
+                    <span id="selectedDate" style="display:none;">Selecione uma data</span>
                 </div>
                     <button type="button" class="nextButton">Prosseguir</button>
             </div>
 
-            <!-- Etapa 3: Horário -->
+            <!-- Etapa 2: Horário -->
             <div class="step" id="step2" style="display: none;">
                 <label for="hora">Horário:</label>
                 <select name="hora" id="hora" required>
@@ -66,7 +66,7 @@
                 <button type="button" class="nextButton">Prosseguir</button>
             </div>
 
-            <!-- Etapa 4: Quadra -->
+            <!-- Etapa 3: Quadra -->
             <div class="step" id="step3" style="display: none;">
                 <label for="quadra">Quadra:</label>
                 <select name="quadra" id="quadra" required>
@@ -80,7 +80,7 @@
                 <button type="button" class="nextButton">Prosseguir</button>
             </div>
 
-            <!-- Etapa 5: Confirmação -->
+            <!-- Etapa 4: Confirmação -->
             <div class="step" id="step4" style="display: none;">
                 <h4>Confirmação:</h4>
                 <p><strong>Telefone:</strong> <span id="confirmTelefone"></span></p>

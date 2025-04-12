@@ -2,35 +2,21 @@
 
 @section('nav')
 <header>
-<nav class="navbar navbar-dark bg-dark fixed-top">
-  <div class="container-fluid">
+<link rel="stylesheet" href="{{ asset(path: 'css/nav.css') }}">
+
+  <nav class="navbar">
     <a class="navbar-brand" href="/dashboard">niXZan</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">niXZan</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/dashboard">Dashboard</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/dashboard/novo-agendamento">Novo agendamento</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/dashboard/meus-agendamentos">Meus agendamentos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" style="color: rgb(241, 63, 63);" href="/logout">Logout</a>
-          </li>
-        </ul>
-      </div>
+    <div class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
-  </div>
-</nav>
+    <div class="nav-links">
+      <a href="/dashboard">Dashboard</a>
+      <a href="/dashboard/novo-agendamento">Novo agendamento</a>
+      <a href="/dashboard/meus-agendamentos">Meus agendamentos</a>
+      <a class="logout" href="/logout">Logout</a>
+    </div>
+  </nav>
 </header>
 @endsection

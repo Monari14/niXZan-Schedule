@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\User;
 class AuthController extends Controller
 {
+    private $erroUser, $erroEmail, $erroTelefone, $erroSenha;
     public function signin(Request $request)
     {
         if ($request->isMethod('post')) {
@@ -32,19 +33,45 @@ class AuthController extends Controller
                 return redirect()->route('signin')->withErrors(['signin' => 'E-mail ou senha incorretos!']);
             }
         }
-
-        return view('pages.signin');
+        return redirect()->route('signin');
     }
 
     public function signup(Request $request)
     {
         if ($request->isMethod('post')) {
-            $request->validate([
-                'username' => 'required|unique:users,username',
-                'email'    => 'required|email|unique:users,email',
-                'telefone' => 'required',
-                'senha'    => 'required|min:6',
-            ]);
+
+            $rules = [
+                'username' => 'required|unique:users,username|max:64',
+                'email' => 'required|email|unique:users,email|max:128',
+                'telefone' => 'required|max:19',
+                'senha' => 'required|min:6|max:64',
+            ];
+
+
+            $messages = [
+                'username.required' => 'Nome de usuário é obrigatório',
+                'username.unique' => 'Nome de usuário já existe',
+                'username.max' => 'Nome de usuário não pode passar de 64 caracteres',
+
+                'email.required' => 'E-mail é obrigatório',
+                'email.email' => 'E-mail inválido',
+                'email.unique' => 'E-mail já está em uso',
+                'email.max' => 'E-mail não pode passar de 128 caracteres',
+
+                'telefone.required' => 'Telefone é obrigatório',
+                'telefone.max' => 'Telefone não pode passar de 19 caracteres',
+
+                'senha.required' => 'Senha é obrigatória',
+                'senha.min' => 'Senha deve ter no mínimo 6 caracteres',
+                'senha.max' => 'Senha não pode passar de 64 caracteres',
+            ];
+
+
+            $validator = \Validator::make($request->all(), $rules, $messages);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
 
             DB::table('users')->insert([
                 'username' => $request->input('username'),
@@ -54,7 +81,7 @@ class AuthController extends Controller
             ]);
 
             $username = $request->input('username');
-            $user = User::where('username', $username)->first(); // Busca o usuário
+            $user = User::where('username', $username)->first();
 
             if (!$user) {
                 return redirect()->back()->with('error', 'Usuário não encontrado');
@@ -63,25 +90,19 @@ class AuthController extends Controller
             Session::put('user_id', $user->id);
 
             $agendamentos = DB::table('agendamentos')
-            ->where('user_id', session('user_id'))
-            ->get();
-
-
-            $usernome = "@$username";
-            // Return the view with the user, username, and appointments
-            // Retorna a view com o usuário, nome de usuário e agendamentos
+                ->where('user_id', session('user_id'))
+                ->get();
 
             return redirect()->route('dashboard')->with([
                 'user' => $user,
-                'username' => $usernome,
+                'username' => "@$username",
                 'agendamentos' => $agendamentos,
             ]);
-
-
         }
 
         return view('pages.signup');
     }
+
 
     public function logout()
     {

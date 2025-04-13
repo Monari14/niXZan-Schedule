@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('nav')
-<title>Imlau</title>
+<title>niXZan</title>
     @include('partials.navPublic')
 @endsection
 @section('content')

@@ -3,7 +3,7 @@
 @section('content')
 @include('partials.navPublic')
 
-<title>Agendamentos</title>
+<title>niXZan</title>
 
 <div class="containerDash text-center">
     <h1 style="font-size: 2.5rem; color: #333;">Bem-vindo ao niXZan Agendamentos</h1>

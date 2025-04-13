@@ -33,13 +33,19 @@ class DashboardController extends Controller
             ->get();
 
         $usernome = "@$username";
-        // Return the view with the user, username, and appointments
-        // Retorna a view com o usuário, nome de usuário e agendamentos
-        return view('dashboard.dash', [
-            'user' => $user,
-            'username' => $usernome,
-            'agendamentos' => $agendamentos,
-        ]);
+
+        if ($user->is_admin) {
+            return view('admin.dashboard')->with([
+                'user' => $user,
+                'username' => $usernome,
+            ]);
+        } else {
+            return view('dashboard.dash', [
+                'user' => $user,
+                'username' => $usernome,
+                'agendamentos' => $agendamentos,
+            ]);
+        }
     }
 
     public function dash()

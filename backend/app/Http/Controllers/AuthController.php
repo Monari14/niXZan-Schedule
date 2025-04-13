@@ -28,16 +28,7 @@ class AuthController extends Controller
 
             if ($user && Hash::check($senha, $user->senha)) {
                 Session::put('user_id', $user->id);
-                if ($user->is_admin) {
-                    $usuario = User::where('username', $user->username)->first();
-                    $usernome = $usuario->username;
-                    return view('admin.dashboard')->with([
-                        'user' => $user,
-                        'username' => "@$usernome",
-                    ]);
-                } else {
-                    return redirect()->route('dashboard');
-                }
+                return redirect()->route('dashboard');
             } else {
                 return redirect()->route('signin')->withErrors(['signin' => 'E-mail ou senha incorretos!']);
             }

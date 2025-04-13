@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-//Utilizado para teste, não vou retirar por caso tenha que usar novamente já tenha.
+/* Utilizado para teste, não vou retirar por caso tenha que usar novamente já tenha.
 
 fetch('http://127.0.0.1:8000/dashboard/novo-agendamento/')
     .then(response => {
@@ -148,3 +148,5 @@ fetch('http://127.0.0.1:8000/dashboard/novo-agendamento/')
         // Lógica para desabilitar as opções
     })
     .catch(error => console.error("Erro ao buscar quadras indisponíveis:", error));
+
+*/

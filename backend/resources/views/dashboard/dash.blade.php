@@ -4,7 +4,7 @@
     @include('partials.navDash')
 
     <div class="containerDash">
-        <h2>Bem-vindo(a) à Dashboard, {{ $username }}!</h2>
+        <h2>Bem-vindo(a), {{ $username }}!</h2>
 
         @if ($agendamentos->isEmpty())
             <p>Você ainda não possui agendamentos.</p>

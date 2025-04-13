@@ -41,7 +41,7 @@ class AuthController extends Controller
         if ($request->isMethod('post')) {
 
             $rules = [
-                'username' => 'required|unique:users,username|max:64',
+                'username' => 'required|unique:users,username|max:64|regex:/^\S*$/',
                 'email' => 'required|email|unique:users,email|max:128',
                 'telefone' => 'required|max:19',
                 'senha' => 'required|min:6|max:64',
@@ -52,6 +52,7 @@ class AuthController extends Controller
                 'username.required' => 'Nome de usuário é obrigatório',
                 'username.unique' => 'Nome de usuário já existe',
                 'username.max' => 'Nome de usuário não pode passar de 64 caracteres',
+                'username.regex' => 'Nome de usuário não pode conter espaços',
 
                 'email.required' => 'E-mail é obrigatório',
                 'email.email' => 'E-mail inválido',

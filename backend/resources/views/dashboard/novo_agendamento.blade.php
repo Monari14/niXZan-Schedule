@@ -21,7 +21,10 @@
             </div>
         @endif
         <form id="agendamentoForm" action="{{ route('dashboard/novo-agendamento') }}" method="POST">
-            @csrf
+        @error('username')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
+        @csrf
             <h2>Novo Agendamento</h2>
 
 
@@ -33,25 +36,27 @@
                     <button type="button" id="calendarButton" style="display:none;"></button>
                     <span id="selectedDate" style="display:none;">Selecione uma data</span>
                 </div>
+                <br>
                     <button type="button" class="nextButton">Prosseguir</button>
             </div>
 
             <!-- Etapa 2: Horário -->
             <div class="step" id="step2" style="display: none;">
                 <label for="hora">Horário:</label>
+                <br>
                 <select name="hora" id="hora" required>
                     <option value="" disabled selected>Selecione a hora</option>
-                    <option value="13:00">13:00</option>
-                    <option value="14:00">14:00</option>
-                    <option value="15:00">15:00</option>
-                    <option value="16:00">16:00</option>
-                    <option value="17:00">17:00</option>
-                    <option value="18:00">18:00</option>
-                    <option value="19:00">19:00</option>
-                    <option value="20:00">20:00</option>
-                    <option value="21:00">21:00</option>
-                    <option value="22:00">22:00</option>
+                    <option value="13:00 - 14:00">13:00 - 14:00</option>
+                    <option value="14:00 - 15:00">14:00 - 15:00</option>
+                    <option value="15:00 - 16:00">15:00 - 16:00</option>
+                    <option value="16:00 - 17:00">16:00 - 17:00</option>
+                    <option value="17:00 - 18:00">17:00 - 18:00</option>
+                    <option value="18:00 - 19:00">18:00 - 19:00</option>
+                    <option value="19:00 - 20:00">19:00 - 20:00</option>
+                    <option value="20:00 - 21:00">20:00 - 21:00</option>
+                    <option value="21:00 - 22:00">21:00 - 22:00</option>
                 </select>
+                <br><br>
                 <button type="button" class="prevButton">Voltar</button>
                 <button type="button" class="nextButton">Prosseguir</button>
             </div>
@@ -59,6 +64,7 @@
             <!-- Etapa 3: Quadra -->
             <div class="step" id="step3" style="display: none;">
                 <label for="quadra">Quadra:</label>
+                <br>
                 <select name="quadra" id="quadra" required>
                     <option value="" disabled selected>Selecione a quadra</option>
                     <option value="Quadra 1">Quadra 1</option>
@@ -66,6 +72,7 @@
                     <option value="Quadra 3">Quadra 3</option>
                     <option value="Quadra 4">Quadra 4</option>
                 </select>
+                <br><br>
                 <button type="button" class="prevButton">Voltar</button>
                 <button type="button" class="nextButton">Prosseguir</button>
             </div>

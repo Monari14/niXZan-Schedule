@@ -15,12 +15,29 @@ class AgendamentoController extends Controller
         }
 
         if ($request->isMethod('post')) {
-            // Valida os dados da requisição
-            $request->validate([
+
+
+            $rules = [
                 'data'     => 'required|date',
-                'hora'     => 'required|date_format:H:i',
+                'hora'     => 'required',
                 'quadra'   => 'required',
-            ]);
+            ];
+
+
+            $messages = [
+                'data.required' => 'É necessário selecionar uma data',
+                'data.date' => 'Data inválida',
+
+                'hora.required' => 'É necessário selecionar uma hora',
+
+                'quadra.required' => 'É necessário selecionar uma quadra',
+            ];
+
+            $validator = \Validator::make($request->all(), $rules, $messages);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
 
             try {
                 // Insere o novo agendamento no banco de dados

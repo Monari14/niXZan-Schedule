@@ -14,8 +14,8 @@
             <input type="text" name="email" id="email" placeholder="E-mail" required> <br><br>
             <input type="tel" name="telefone" id="telefone" placeholder="Telefone" required> <br><br>
             <input type="password" name="senha" placeholder="Senha" required> <br><br>
-            <button type="submit">Cadastrar</button>
             <button type="reset">Resetar</button>
+            <button type="submit">Cadastrar</button>
         </form>
     </div>
 @endsection

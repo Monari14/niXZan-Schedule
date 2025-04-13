@@ -28,7 +28,16 @@ class AuthController extends Controller
 
             if ($user && Hash::check($senha, $user->senha)) {
                 Session::put('user_id', $user->id);
-                return redirect()->route('dashboard');
+                if ($user->is_admin) {
+                    $usuario = User::where('username', $user->username)->first();
+                    $usernome = $usuario->username;
+                    return view('admin.dashboard')->with([
+                        'user' => $user,
+                        'username' => "@$usernome",
+                    ]);
+                } else {
+                    return redirect()->route('dashboard');
+                }
             } else {
                 return redirect()->route('signin')->withErrors(['signin' => 'E-mail ou senha incorretos!']);
             }
@@ -74,12 +83,16 @@ class AuthController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
             }
 
+            $primeiroUsuario = DB::table('users')->count() === 0;
+
             DB::table('users')->insert([
                 'username' => $request->input('username'),
                 'email'    => $request->input('email'),
                 'telefone' => $request->input('telefone'),
                 'senha'    => Hash::make($request->input('senha')),
+                'is_admin' => $primeiroUsuario ? 1 : 0,
             ]);
+
 
             $username = $request->input('username');
             $user = User::where('username', $username)->first();
@@ -94,11 +107,18 @@ class AuthController extends Controller
                 ->where('user_id', session('user_id'))
                 ->get();
 
-            return redirect()->route('dashboard')->with([
-                'user' => $user,
-                'username' => "@$username",
-                'agendamentos' => $agendamentos,
-            ]);
+            if ($user->is_admin) {
+                return view('admin.dashboard')->with([
+                    'user' => $user,
+                    'username' => "@$username",
+                ]);
+            } else {
+                return redirect()->route('dashboard')->with([
+                    'user' => $user,
+                    'username' => "@$username",
+                    'agendamentos' => $agendamentos,
+                ]);
+            }
         }
 
         return view('pages.signup');

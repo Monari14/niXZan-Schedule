@@ -30,9 +30,7 @@
                 <label for="data">Data:</label>
                 <div style="display: flex; align-items: center;">
                     <input type="text" name="data" id="data" placeholder="Selecione a data" required >
-                    <button type="button" id="calendarButton">
-                        <img src="https://cdn-icons-png.flaticon.com/512/747/747310.png" alt="Ícone de calendário" width="24" height="24">
-                    </button>
+                    <button type="button" id="calendarButton" style="display:none;"></button>
                     <span id="selectedDate" style="display:none;">Selecione uma data</span>
                 </div>
                     <button type="button" class="nextButton">Prosseguir</button>
@@ -43,23 +41,15 @@
                 <label for="hora">Horário:</label>
                 <select name="hora" id="hora" required>
                     <option value="" disabled selected>Selecione a hora</option>
-                    <option value="13:30">13:30</option>
+                    <option value="13:00">13:00</option>
                     <option value="14:00">14:00</option>
-                    <option value="14:30">14:30</option>
                     <option value="15:00">15:00</option>
-                    <option value="15:30">15:30</option>
                     <option value="16:00">16:00</option>
-                    <option value="16:30">16:30</option>
                     <option value="17:00">17:00</option>
-                    <option value="17:30">17:30</option>
                     <option value="18:00">18:00</option>
-                    <option value="18:30">18:30</option>
                     <option value="19:00">19:00</option>
-                    <option value="19:30">19:30</option>
                     <option value="20:00">20:00</option>
-                    <option value="20:30">20:30</option>
                     <option value="21:00">21:00</option>
-                    <option value="21:30">21:30</option>
                     <option value="22:00">22:00</option>
                 </select>
                 <button type="button" class="prevButton">Voltar</button>
@@ -83,7 +73,6 @@
             <!-- Etapa 4: Confirmação -->
             <div class="step" id="step4" style="display: none;">
                 <h4>Confirmação:</h4>
-                <p><strong>Telefone:</strong> <span id="confirmTelefone"></span></p>
                 <p><strong>Data:</strong> <span id="confirmData"></span></p>
                 <p><strong>Horário:</strong> <span id="confirmHora"></span></p>
                 <p><strong>Quadra:</strong> <span id="confirmQuadra"></span></p>

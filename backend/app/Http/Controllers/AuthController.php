@@ -33,7 +33,7 @@ class AuthController extends Controller
                 return redirect()->route('signin')->withErrors(['signin' => 'E-mail ou senha incorretos!']);
             }
         }
-        return redirect()->route('signin');
+        return view('pages.signin');
     }
 
     public function signup(Request $request)

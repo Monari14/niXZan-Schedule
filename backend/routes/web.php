@@ -49,3 +49,6 @@ Route::get('/dashboard/meus-agendamentos', [AgendamentoController::class, 'meus_
 Route::get('/dashboard/delete-agendamentos', [AgendamentoController::class, 'meus_agendamentos'])->name('meus_agendamentos');
 Route::get('/dashboard/delete-agendamentos/{id}', [AgendamentoController::class, 'meus_agendamentos'])->name('meus_agendamentos');
 Route::delete('/dashboard/delete-agendamentos/{id}', [AgendamentoController::class, 'delete_agendamentos'])->name('delete_agendamentos');
+
+Route::get('/dashboard/admin/agendamentos', [DashboardController::class, 'todosAgendamentos'])->name('todos_agendamentos');
+

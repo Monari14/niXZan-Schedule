@@ -47,10 +47,9 @@ class DashboardController extends Controller
             ]);
         }
     }
-
-    public function dash()
+    public function todosAgendamentos()
     {
-        // Check if the user is logged
+// Check if the user is logged
         // Verifica se o usuário está logado
         if (!session('user_id')) {
             return redirect()->route('signin');
@@ -58,13 +57,15 @@ class DashboardController extends Controller
 
         // Search for the user in the database
         // Busca o usuário no banco de dados
-        $user = DB::table('users')->where('id', session('user_id'))->first();
+        $userLogado = DB::table('users')->where('id', session('user_id'))->first();
+        $agendamento = DB::table('agendamentos')->first();
+
         // Get the username || Pega o nome de usuário
         $username = $user->username ?? 'Usuário';
 
         // Check if the user exists
         // Verifica se o usuário existe
-        if (!$user) {
+        if (!$userLogado) {
             return redirect()->route('signin');
         }
 
@@ -74,14 +75,23 @@ class DashboardController extends Controller
             ->where('user_id', session('user_id'))
             ->get();
 
-        $usernome = "@$username";
-        // Return the view with the user, username, and appointments
-        // Retorna a view com o usuário, nome de usuário e agendamentos
-        return view('dashboard.dash', [
-            'user' => $user,
-            'username' => $usernome,
-            'agendamentos' => $agendamentos,
-        ]);
-    }
+        $userAgendamento = DB::table('agendamentos')
+            ->where('user_id', session('user_id'))
+            ->get();
+        $usernome = "@$userAgendamento";
 
+        if ($userLogado->is_admin) {
+            return view('admin.todos_agendamentos')->with([
+                'user' => $userLogado,
+                'username' => $usernome,
+                'agendamentos' => $agendamento,
+            ]);
+        } else {
+            return view('dashboard.dash', [
+                'user' => $userLogado,
+                'username' => $usernome,
+                'agendamentos' => $agendamentos,
+            ]);
+        }
+    }
 }

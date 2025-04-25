@@ -134,4 +134,20 @@ class AgendamentoController extends Controller
         ]);
     }
 
+    public function admin_delete_agendamentos($id)
+    {
+        $agendamento = Agendamento::findOrFail($id);
+        $agendamento->delete();
+
+        // pegar todos os agendamentos em ordem do mais recente para o mais antigo
+        $agendamentos = DB::table('agendamentos')
+        ->join('users', 'agendamentos.user_id', '=', 'users.id')
+        ->select('agendamentos.*', 'users.username')
+        ->orderBy('agendamentos.data', 'desc')
+        ->get();
+
+        return view('admin.agendamentos', [
+            'agendamentos' => $agendamentos,
+        ])->with('success', 'Agendamento excluído com sucesso!');
+    }
 }

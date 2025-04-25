@@ -20,12 +20,19 @@
                 {{ $sucesso }}
             </div>
         @endif
+
+
+        <div class="container mt-5">
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5>Novo Agendamento</h5>
+                </div>
+        <div class="card-body">
         <form id="agendamentoForm" action="{{ route('dashboard/novo-agendamento') }}" method="POST">
         @error('username')
             <div class="text-danger">{{ $message }}</div>
         @enderror
         @csrf
-            <h2>Novo Agendamento</h2>
 
 
             <!-- Etapa 1: Data -->
@@ -87,6 +94,7 @@
                 <button type="submit">Confirmar</button>
             </div>
         </form>
+        </div></div></div>
     </div>
     <script src="{{ asset('js/script.js') }}"></script>
 @endsection

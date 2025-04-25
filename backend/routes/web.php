@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AgendamentoController;
 // Route default
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -49,3 +51,8 @@ Route::get('/dashboard/meus-agendamentos', [AgendamentoController::class, 'meus_
 Route::get('/dashboard/delete-agendamentos', [AgendamentoController::class, 'meus_agendamentos'])->name('meus_agendamentos');
 Route::get('/dashboard/delete-agendamentos/{id}', [AgendamentoController::class, 'meus_agendamentos'])->name('meus_agendamentos');
 Route::delete('/dashboard/delete-agendamentos/{id}', [AgendamentoController::class, 'delete_agendamentos'])->name('delete_agendamentos');
+
+
+Route::get('/dashboard/admin/settings', [DashboardController::class, 'mySettings'])->name('settings');
+Route::get('/dashboard/admin/agendamentos', [DashboardController::class, 'todosAgendamentos'])->name('agendamentos');
+Route::get('/dashboard/admin/usuarios', [DashboardController::class, 'todosUsuarios'])->name('todos_usuarios');

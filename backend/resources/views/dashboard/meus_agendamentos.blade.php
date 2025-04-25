@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<title>Meus agendamentos</title>
+
 @include('partials.navDash')
 <div class="containerDash">
     @if (isset($error))

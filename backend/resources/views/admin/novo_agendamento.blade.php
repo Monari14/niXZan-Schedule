@@ -10,7 +10,7 @@
     <!-- Scripts do Flatpickr -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script> <!-- Tradução PT -->
-    <div class="container">
+    <div>
         @if(isset($error))
             <div class="alert alert-danger" style="align-self: center; max-width: 500px;">
                 {{ $error }}

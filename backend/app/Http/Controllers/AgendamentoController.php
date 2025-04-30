@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Agendamento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
+
 class AgendamentoController extends Controller
 {
     public function novo_agendamento(Request $request)
@@ -15,14 +17,11 @@ class AgendamentoController extends Controller
         }
 
         if ($request->isMethod('post')) {
-
-
             $rules = [
                 'data'     => 'required|date',
                 'hora'     => 'required',
                 'quadra'   => 'required',
             ];
-
 
             $messages = [
                 'data.required' => 'É necessário selecionar uma data',
@@ -55,9 +54,15 @@ class AgendamentoController extends Controller
                 return redirect()->back()->with('error', 'Erro ao realizar o agendamento. Tente novamente.');
             }
         }
+        $user_id = session('user_id');
+        $username = DB::table('users')->where('id', $user_id)->value('username');
+        $user = User::where('username', $username)->first();
 
-        // Retorna a view de novo agendamento
-        return view('dashboard.novo_agendamento');
+        if ($user->is_admin) {
+            return view('admin.novo_agendamento');
+        } else {
+            return view('dashboard.novo_agendamento');
+        }
     }
     public function getAgendamentos($data, $quadra)
     {

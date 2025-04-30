@@ -2,7 +2,7 @@
 
 @section('content')
 <title>Novo agendamento</title>
-    @include('partials.navDash')
+    @include('partials.navDashAdm')
 
     <!-- CSS do Flatpickr -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -28,17 +28,17 @@
                     <h5>Novo Agendamento</h5>
                 </div>
         <div class="card-body">
-        <form id="agendamentoForm" action="{{ route('dashboard/novo-agendamento') }}" method="POST">
-            @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $erro)
-                                <li>{{ $erro }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-            @csrf
+        <form id="agendamentoForm" action="{{ route('dashboard/admin/novo-agendamento') }}" method="POST">
+        @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $erro)
+                            <li>{{ $erro }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        @csrf
             <!-- Etapa 1: Data -->
             <div class="step" id="step1" style="display: none;">
                 <label for="data">Data:</label>

@@ -13,6 +13,7 @@
     </div>
     <div class="nav-links">
       <a href="/dashboard">Dashboard</a>
+      <a href="/dashboard/admin/novo-agendamento">Novo agendamento</a>
       <a href="/dashboard/admin/usuarios">Usuários</a>
       <a href="/dashboard/admin/agendamentos">Agendamentos</a>
       <a href="/dashboard/admin/settings">Meu perfil</a>

@@ -22,7 +22,18 @@
                     <td>{{ $usuario->username }}</td>
                     <td>{{ $usuario->email }}</td>
                     <td>{{ $usuario->telefone }}</td>
-                    <td>{{ $usuario->is_admin == 1 ? 'Sim' : 'Não' }}</td>
+                    <td>
+                        <form action="{{ route('admin_update', $usuario->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="id" value="{{ $usuario->id }}">
+                            <select name="admin" id="admin">
+                                <option value="0" {{ $usuario->is_admin == 0 ? 'selected' : '' }}>Não</option>
+                                <option value="1" {{ $usuario->is_admin == 1 ? 'selected' : '' }}>Sim</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

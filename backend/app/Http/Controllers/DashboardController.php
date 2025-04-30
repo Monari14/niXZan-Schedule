@@ -106,7 +106,7 @@ class DashboardController extends Controller
             // pegar todos os agendamentos em ordem do mais recente para o mais antigo
             $agendamentos = DB::table('agendamentos')
             ->join('users', 'agendamentos.user_id', '=', 'users.id')
-            ->select('agendamentos.*', 'users.username')
+            ->select('agendamentos.*', 'users.username', 'users.telefone')
             ->orderBy('agendamentos.data', 'desc')
             ->get();
             return view('admin.agendamentos')->with([

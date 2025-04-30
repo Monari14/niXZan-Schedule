@@ -8,29 +8,34 @@ use Illuminate\Support\Facades\Session;
 use App\Models\User;
 class AuthController extends Controller
 {
-    private $erroUser, $erroEmail, $erroTelefone, $erroSenha;
     public function signin(Request $request)
     {
         if ($request->isMethod('post')) {
             $request->validate([
                 'emailUser' => 'required',
-                'senha'         => 'required',
+                'senha' => 'required',
             ]);
 
             $emailUser = $request->input('emailUser');
-            $senha         = $request->input('senha');
-
+            $senha = $request->input('senha');
+            $userOrEmail = "";
             if (filter_var($emailUser, FILTER_VALIDATE_EMAIL)) {
                 $user = DB::table('users')->where('email', $emailUser)->first();
+                $userOrEmail = "email";
             } else {
                 $user = DB::table('users')->where('username', $emailUser)->first();
+                $userOrEmail = "username";
             }
 
             if ($user && Hash::check($senha, $user->senha)) {
                 Session::put('user_id', $user->id);
                 return redirect()->route('dashboard');
             } else {
-                return redirect()->route('signin')->withErrors(['signin' => 'E-mail ou senha incorretos!']);
+                if($userOrEmail == "email") {
+                    return redirect()->route('signin')->withErrors(['signin' => 'E-mail ou senha incorretos!']);
+                } else {
+                    return redirect()->route('signin')->withErrors(['signin' => 'Nome de usuário ou senha incorretos!']);
+                }
             }
         }
         return view('pages.signin');
@@ -39,14 +44,12 @@ class AuthController extends Controller
     public function signup(Request $request)
     {
         if ($request->isMethod('post')) {
-
             $rules = [
                 'username' => 'required|unique:users,username|max:64|regex:/^\S*$/',
                 'email' => 'required|email|unique:users,email|max:128',
                 'telefone' => 'required|max:19',
                 'senha' => 'required|min:6|max:64',
             ];
-
 
             $messages = [
                 'username.required' => 'Nome de usuário é obrigatório',
@@ -67,7 +70,6 @@ class AuthController extends Controller
                 'senha.max' => 'Senha não pode passar de 64 caracteres',
             ];
 
-
             $validator = \Validator::make($request->all(), $rules, $messages);
 
             if ($validator->fails()) {
@@ -83,7 +85,6 @@ class AuthController extends Controller
                 'senha'    => Hash::make($request->input('senha')),
                 'is_admin' => $primeiroUsuario ? 1 : 0,
             ]);
-
 
             $username = $request->input('username');
             $user = User::where('username', $username)->first();
@@ -111,15 +112,25 @@ class AuthController extends Controller
                 ]);
             }
         }
-
         return view('pages.signup');
     }
 
+    public function admin_update(Request $request, $id)
+    {
+        $request->validate([
+            'admin' => 'required|boolean',
+        ]);
+
+        DB::table('users')
+            ->where('id', $id)
+            ->update(['is_admin' => $request->input('admin')]);
+
+        return redirect()->route('todos_usuarios')->with('success', 'Permissão de administrador atualizada com sucesso!');
+    }
 
     public function logout()
     {
         Session::flush();
-
         return redirect()->route('logout');
     }
 }

@@ -52,6 +52,9 @@ Route::get('/dashboard/delete-agendamentos', [AgendamentoController::class, 'meu
 Route::get('/dashboard/delete-agendamentos/{id}', [AgendamentoController::class, 'meus_agendamentos'])->name('meus_agendamentos');
 Route::delete('/dashboard/delete-agendamentos/{id}', [AgendamentoController::class, 'delete_agendamentos'])->name('delete_agendamentos');
 
+Route::get('/dashboard/admin/novo-agendamento', [AgendamentoController::class, 'novo_agendamento'])->name('novo_agendamentoAdm');
+Route::post('/dashboard/admin/novo-agendamento', [AgendamentoController::class, 'novo_agendamento'])->name('dashboard/admin/novo-agendamento');
+
 Route::get('/dashboard/admin/settings', [DashboardController::class, 'mySettings'])->name('settings');
 Route::get('/dashboard/admin/agendamentos', [DashboardController::class, 'todosAgendamentos'])->name('agendamentos');
 Route::get('/dashboard/admin/usuarios', [DashboardController::class, 'todosUsuarios'])->name('todos_usuarios');
@@ -59,3 +62,5 @@ Route::get('/dashboard/admin/usuarios', [DashboardController::class, 'todosUsuar
 Route::get('/dashboard/admin/delete-agendamentos', [DashboardController::class, 'todosAgendamentos'])->name('agendamentos');
 Route::get('/dashboard/admin/delete-agendamentos/{id}', [DashboardController::class, 'todosAgendamentos'])->name('agendamentos');
 Route::delete('/dashboard/admin/delete-agendamentos/{id}', [AgendamentoController::class, 'admin_delete_agendamentos'])->name('deletar_agendamentos');
+
+Route::put('/dashboard/admin/update-admin-admin-update/{id}', [AuthController::class, 'admin_update'])->name('admin_update');

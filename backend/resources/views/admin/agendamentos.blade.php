@@ -12,6 +12,7 @@
                 <th>Data</th>
                 <th>Hora</th>
                 <th>Usuário</th>
+                <th>Telefone</th>
                 <th>Quadra</th>
             </tr>
         </thead>
@@ -22,13 +23,14 @@
                     <td>{{ $agendamento->data }}</td>
                     <td>{{ $agendamento->hora }}</td>
                     <td>{{ $agendamento->username }}</td>
+                    <td>{{ $agendamento->telefone }}</td>
                     <td>{{ $agendamento->quadra }}</td>
                     <td>
-                    <form style="background: transparent; box-shadow: 0 4px 10px transparent;" action="{{ route('deletar_agendamentos', ['id' => $agendamento->id]) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit">Excluir</button>
-                    </form>
+                        <form style="background: transparent; box-shadow: 0 4px 10px transparent;" action="{{ route('deletar_agendamentos', ['id' => $agendamento->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Excluir</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
